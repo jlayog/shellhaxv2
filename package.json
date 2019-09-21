@@ -1,0 +1,24 @@
+{
+  "name": "shellhaxv2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlayog/shellhaxv2.git"
+  },
+  "author": "Jerel Layog & Francis Calizo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlayog/shellhaxv2/issues"
+  },
+  "homepage": "https://github.com/jlayog/shellhaxv2#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1",
+    "react": "^16.9.0"
+  }
+}
