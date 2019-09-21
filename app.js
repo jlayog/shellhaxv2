@@ -17,7 +17,7 @@ const db = require('./config/keys').mongoURI;
 
 // Connect MongoDB
 mongoose    
-    .connect(db, { usrNewUrlParser: true}) // removing deprication warning
+    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true}) // removing deprication warning
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 
@@ -26,6 +26,19 @@ app.use(passport.initialize());
 
 // Passport Config
 require('./config/passport')(passport);
+
+// Use Routes
+app.use('/api/users', users);
+app.use('/api/profile', profile);
+
+if (process.env.NODE_ENV === 'production') {
+    // Static folder
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 const port = process.env.PORT || 3000;
 
