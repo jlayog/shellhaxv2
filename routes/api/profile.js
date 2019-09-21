@@ -26,7 +26,7 @@ router.get(
     const errors = {};
 
     Profile.findOne({ user: req.user.id })
-      .populate('user', ['name', 'avatar'])
+      .populate('user', ['name'])
       .then(profile => {
         if (!profile) {
           errors.noprofile = 'There is no profile for this user';
@@ -45,7 +45,7 @@ router.get('/all', (req, res) => {
   const errors = {};
 
   Profile.find()
-    .populate('user', ['name', 'avatar'])
+    .populate('user', ['name'])
     .then(profiles => {
       if (!profiles) {
         errors.noprofile = 'There are no profiles';
@@ -65,7 +65,7 @@ router.get('/handle/:handle', (req, res) => {
   const errors = {};
 
   Profile.findOne({ handle: req.params.handle })
-    .populate('user', ['name', 'avatar'])
+    .populate('user', ['name''])
     .then(profile => {
       if (!profile) {
         errors.noprofile = 'There is no profile for this user';
@@ -85,7 +85,7 @@ router.get('/user/:user_id', (req, res) => {
   const errors = {};
 
   Profile.findOne({ user: req.params.user_id })
-    .populate('user', ['name', 'avatar'])
+    .populate('user', ['name'])
     .then(profile => {
       if (!profile) {
         errors.noprofile = 'There is no profile for this user';
@@ -103,7 +103,7 @@ router.get('/user/:user_id', (req, res) => {
 // @desc    Create or Edit user profile
 // @access  Private
 router.post(
-  '/', 
+  '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const { errors, isValid } = validateProfileInput(req.body);
@@ -132,8 +132,8 @@ router.post(
     Profile
       .findOne({ user: req.user.id })
       .then(profile => {
-        // If profile not exist, then create a new one, Otherwise just update 
-        
+        // If profile not exist, then create a new one, Otherwise just update
+
         // Create new profile
         if(!profile){
           // Check if handle exists (handle should be unoque for all profile)

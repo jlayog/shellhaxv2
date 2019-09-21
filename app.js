@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const path = require('path');
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
@@ -16,7 +17,7 @@ app.use(bodyParser.json());
 const db = require('./config/keys').mongoURI;
 
 // Connect MongoDB
-mongoose    
+mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true}) // removing deprication warning
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
@@ -40,6 +41,6 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server connected on port ${port}`));
